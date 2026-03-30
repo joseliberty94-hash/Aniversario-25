@@ -10,7 +10,6 @@
 
 <style>
 
-/* RESET */
 *{
 margin:0;
 padding:0;
@@ -24,6 +23,11 @@ color:white;
 overflow-x:hidden;
 }
 
+/* SCROLL SUAVE */
+html{
+scroll-behavior:smooth;
+}
+
 /* HERO */
 .hero{
 height:100vh;
@@ -32,27 +36,26 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-position:relative;
-background:radial-gradient(circle at 20% 20%, #1e3a8a, #05070d 70%);
+background:radial-gradient(circle at 50% 50%, #0d1b3d, #05070d);
 }
 
 .hero h1{
 font-size:80px;
 font-weight:800;
-letter-spacing:-2px;
+line-height:1;
 }
 
 .hero p{
 margin-top:20px;
+opacity:0.6;
 font-size:18px;
-opacity:0.7;
 }
 
 .btn{
 margin-top:30px;
+background:#1e90ff;
 padding:15px 35px;
-border-radius:40px;
-background:linear-gradient(135deg,#3b82f6,#2563eb);
+border-radius:50px;
 text-decoration:none;
 color:white;
 font-weight:600;
@@ -60,108 +63,53 @@ transition:0.3s;
 }
 
 .btn:hover{
-transform:scale(1.05);
+transform:scale(1.08);
 }
 
-/* SCROLL EFFECT */
-.fade{
+/* SECCIONES STORY */
+.section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+}
+
+.section h2{
+font-size:70px;
+max-width:900px;
+line-height:1.1;
 opacity:0;
-transform:translateY(40px);
+transform:translateY(50px);
 transition:1s;
 }
 
-.fade.show{
+/* ANIMACION SCROLL */
+.section.active h2{
 opacity:1;
 transform:translateY(0);
 }
 
-/* SECTION */
-.section{
-padding:120px 20px;
-max-width:1100px;
-margin:auto;
-text-align:center;
-}
-
-.section h2{
-font-size:50px;
-margin-bottom:20px;
-}
-
-.section p{
-opacity:0.7;
-max-width:600px;
-margin:auto;
-}
-
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:40px;
-margin-top:60px;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-border-radius:20px;
-padding:30px;
-backdrop-filter:blur(15px);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-}
-
-/* BIG TEXT SECTION */
-.big-text{
-font-size:70px;
-font-weight:800;
-line-height:1.1;
-text-align:center;
-padding:120px 20px;
-}
-
-/* SPEAKERS */
-.speakers{
-display:flex;
-gap:20px;
-overflow-x:auto;
-padding-top:40px;
-}
-
-.speaker{
-min-width:220px;
-background:#0c0f1a;
-border-radius:20px;
-overflow:hidden;
-}
-
-.speaker img{
-width:100%;
-height:260px;
-object-fit:cover;
-}
+/* DIFERENTES FONDOS */
+.s1{ background:#05070d;}
+.s2{ background:#08122a;}
+.s3{ background:#0d1b3d;}
+.s4{ background:#111c3f;}
 
 /* CTA FINAL */
 .cta{
-padding:120px 20px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-background:linear-gradient(135deg,#1e40af,#2563eb);
+background:linear-gradient(135deg,#1e90ff,#002f6c);
 }
 
 .cta h2{
-font-size:50px;
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{
-height:6px;
-}
-::-webkit-scrollbar-thumb{
-background:#2563eb;
-border-radius:10px;
+font-size:60px;
 }
 
 </style>
@@ -172,82 +120,43 @@ border-radius:10px;
 <!-- HERO -->
 <section class="hero">
 <h1>LIBERTY 25</h1>
-<p>Esto no es una fiesta. Es historia.</p>
+<p>No es una fiesta. Es historia.</p>
 <a href="#" class="btn">Registrarse</a>
 </section>
 
-<!-- FRASE GRANDE -->
-<section class="big-text fade">
-25 años conectando personas, negocios y experiencias
+<!-- STORYTELLING -->
+<section class="section s1">
+<h2>25 años creando experiencias</h2>
 </section>
 
-<!-- BENEFICIOS -->
-<section class="section fade">
-<h2>Una experiencia única</h2>
-<p>No venís a un evento. Venís a vivir algo distinto.</p>
-
-<div class="grid">
-<div class="card">
-<h3>Networking</h3>
-<p>Conectá con agencias y partners clave</p>
-</div>
-
-<div class="card">
-<h3>Celebración</h3>
-<p>Un evento pensado para disfrutar</p>
-</div>
-
-<div class="card">
-<h3>Experiencia</h3>
-<p>Producción, música y ambiente premium</p>
-</div>
-</div>
+<section class="section s2">
+<h2>Conectando personas</h2>
 </section>
 
-<!-- SPEAKERS -->
-<section class="section fade">
-<h2>Invitados</h2>
-
-<div class="speakers">
-<div class="speaker">
-<img src="https://picsum.photos/300/400?1">
-<p style="padding:15px;">Invitado 1</p>
-</div>
-
-<div class="speaker">
-<img src="https://picsum.photos/300/400?2">
-<p style="padding:15px;">Invitado 2</p>
-</div>
-
-<div class="speaker">
-<img src="https://picsum.photos/300/400?3">
-<p style="padding:15px;">Invitado 3</p>
-</div>
-</div>
-
+<section class="section s3">
+<h2>Construyendo el futuro del turismo</h2>
 </section>
 
-<!-- FRASE FINAL -->
-<section class="big-text fade">
-No es un evento más. Es Liberty.
+<section class="section s4">
+<h2>Y esto recién empieza</h2>
 </section>
 
 <!-- CTA -->
-<section class="cta fade">
-<h2>¿Te lo vas a perder?</h2>
+<section class="cta">
+<h2>¿Vas a ser parte?</h2>
 <a href="#" class="btn">Reservar lugar</a>
 </section>
 
 <script>
 
-// SCROLL ANIMATION
-const elements = document.querySelectorAll('.fade');
+// animacion al hacer scroll
+const sections = document.querySelectorAll(".section");
 
-window.addEventListener('scroll', () => {
-elements.forEach(el => {
-const top = el.getBoundingClientRect().top;
+window.addEventListener("scroll", () => {
+sections.forEach(sec => {
+const top = sec.getBoundingClientRect().top;
 if(top < window.innerHeight - 100){
-el.classList.add('show');
+sec.classList.add("active");
 }
 });
 });
