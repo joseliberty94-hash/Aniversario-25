@@ -10,6 +10,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -23,9 +24,17 @@ color:white;
 overflow-x:hidden;
 }
 
-/* SCROLL SUAVE */
-html{
-scroll-behavior:smooth;
+/* BACKGROUND GLOW */
+body::before{
+content:"";
+position:fixed;
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(37,99,235,0.3),transparent);
+top:-200px;
+left:-200px;
+filter:blur(120px);
+z-index:-1;
 }
 
 /* HERO */
@@ -36,80 +45,160 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:radial-gradient(circle at 50% 50%, #0d1b3d, #05070d);
+position:relative;
 }
 
 .hero h1{
-font-size:80px;
+font-size:90px;
 font-weight:800;
-line-height:1;
+letter-spacing:-3px;
+animation:fadeUp 1s ease;
 }
 
 .hero p{
 margin-top:20px;
-opacity:0.6;
-font-size:18px;
+font-size:20px;
+opacity:0.7;
+animation:fadeUp 1.5s ease;
 }
 
 .btn{
-margin-top:30px;
-background:#1e90ff;
-padding:15px 35px;
+margin-top:40px;
+padding:18px 40px;
 border-radius:50px;
+background:linear-gradient(135deg,#3b82f6,#2563eb);
 text-decoration:none;
 color:white;
 font-weight:600;
+font-size:18px;
 transition:0.3s;
+display:inline-block;
+animation:fadeUp 2s ease;
 }
 
 .btn:hover{
-transform:scale(1.08);
+transform:scale(1.07);
+box-shadow:0 10px 40px rgba(37,99,235,0.6);
 }
 
-/* SECCIONES STORY */
+/* SECCIONES */
 .section{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:140px 20px;
+max-width:1100px;
+margin:auto;
 text-align:center;
-padding:40px;
 }
 
 .section h2{
-font-size:70px;
-max-width:900px;
+font-size:55px;
+margin-bottom:20px;
+}
+
+.section p{
+opacity:0.7;
+max-width:600px;
+margin:auto;
+}
+
+/* BIG TEXT */
+.big{
+font-size:80px;
+font-weight:800;
+text-align:center;
+padding:160px 20px;
 line-height:1.1;
+}
+
+/* CARDS */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+margin-top:60px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:40px;
+border-radius:25px;
+backdrop-filter:blur(20px);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.02);
+}
+
+/* SPEAKERS */
+.speakers{
+display:flex;
+gap:25px;
+overflow-x:auto;
+padding-top:50px;
+scroll-snap-type:x mandatory;
+}
+
+.speaker{
+min-width:240px;
+background:#0c0f1a;
+border-radius:20px;
+overflow:hidden;
+scroll-snap-align:start;
+transition:0.3s;
+}
+
+.speaker:hover{
+transform:scale(1.05);
+}
+
+.speaker img{
+width:100%;
+height:280px;
+object-fit:cover;
+}
+
+/* CTA */
+.cta{
+padding:140px 20px;
+text-align:center;
+background:linear-gradient(135deg,#1e40af,#2563eb);
+}
+
+.cta h2{
+font-size:55px;
+margin-bottom:30px;
+}
+
+/* ANIMACIONES */
+.fade{
 opacity:0;
-transform:translateY(50px);
+transform:translateY(60px);
 transition:1s;
 }
 
-/* ANIMACION SCROLL */
-.section.active h2{
+.fade.show{
 opacity:1;
 transform:translateY(0);
 }
 
-/* DIFERENTES FONDOS */
-.s1{ background:#05070d;}
-.s2{ background:#08122a;}
-.s3{ background:#0d1b3d;}
-.s4{ background:#111c3f;}
-
-/* CTA FINAL */
-.cta{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(135deg,#1e90ff,#002f6c);
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-.cta h2{
-font-size:60px;
+/* SCROLLBAR */
+::-webkit-scrollbar{
+height:6px;
+}
+::-webkit-scrollbar-thumb{
+background:#2563eb;
+border-radius:10px;
 }
 
 </style>
@@ -120,43 +209,90 @@ font-size:60px;
 <!-- HERO -->
 <section class="hero">
 <h1>LIBERTY 25</h1>
-<p>No es una fiesta. Es historia.</p>
+<p>Esto no es una fiesta. Es historia.</p>
+
+<!-- 🔥 ACA VA TU WIDGET -->
 <a href="#" class="btn">Registrarse</a>
+<!-- reemplazá este botón por tu código embed -->
+
 </section>
 
-<!-- STORYTELLING -->
-<section class="section s1">
-<h2>25 años creando experiencias</h2>
+<!-- FRASE IMPACTO -->
+<section class="big fade">
+25 años conectando personas, negocios y experiencias
 </section>
 
-<section class="section s2">
-<h2>Conectando personas</h2>
+<!-- BENEFICIOS -->
+<section class="section fade">
+<h2>Una experiencia única</h2>
+<p>No venís a un evento. Venís a vivir algo distinto.</p>
+
+<div class="grid">
+<div class="card">
+<h3>Networking</h3>
+<p>Conectá con agencias y partners clave</p>
+</div>
+
+<div class="card">
+<h3>Celebración</h3>
+<p>Un evento diseñado para sorprender</p>
+</div>
+
+<div class="card">
+<h3>Experiencia</h3>
+<p>Producción, música y ambiente premium</p>
+</div>
+</div>
 </section>
 
-<section class="section s3">
-<h2>Construyendo el futuro del turismo</h2>
+<!-- INVITADOS -->
+<section class="section fade">
+<h2>Invitados</h2>
+
+<div class="speakers">
+<div class="speaker">
+<img src="https://picsum.photos/300/400?1">
+<p style="padding:15px;">Invitado 1</p>
+</div>
+
+<div class="speaker">
+<img src="https://picsum.photos/300/400?2">
+<p style="padding:15px;">Invitado 2</p>
+</div>
+
+<div class="speaker">
+<img src="https://picsum.photos/300/400?3">
+<p style="padding:15px;">Invitado 3</p>
+</div>
+</div>
+
 </section>
 
-<section class="section s4">
-<h2>Y esto recién empieza</h2>
+<!-- FRASE FINAL -->
+<section class="big fade">
+No es un evento más. Es Liberty.
 </section>
 
-<!-- CTA -->
-<section class="cta">
-<h2>¿Vas a ser parte?</h2>
+<!-- CTA FINAL -->
+<section class="cta fade">
+<h2>¿Te lo vas a perder?</h2>
+
+<!-- 🔥 ACA TAMBIÉN PODÉS PONER EL WIDGET -->
 <a href="#" class="btn">Reservar lugar</a>
+
 </section>
 
 <script>
 
-// animacion al hacer scroll
-const sections = document.querySelectorAll(".section");
+// SCROLL ANIMATION
+const elements = document.querySelectorAll('.fade');
 
-window.addEventListener("scroll", () => {
-sections.forEach(sec => {
-const top = sec.getBoundingClientRect().top;
+window.addEventListener('scroll', () => {
+elements.forEach(el => {
+const top = el.getBoundingClientRect().top;
+
 if(top < window.innerHeight - 100){
-sec.classList.add("active");
+el.classList.add('show');
 }
 });
 });
