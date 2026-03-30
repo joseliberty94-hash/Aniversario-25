@@ -20,24 +20,10 @@ color:white;
 overflow-x:hidden;
 }
 
-/* LOADER */
-.loader{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-font-size:30px;
-letter-spacing:5px;
-}
-
-/* HERO SCENE */
+/* HERO SCROLL CONTROL */
 .hero{
+height:300vh;
 position:relative;
-height:200vh;
 }
 
 .sticky{
@@ -52,6 +38,7 @@ text-align:center;
 overflow:hidden;
 }
 
+/* VIDEO */
 video{
 position:absolute;
 width:100%;
@@ -72,14 +59,14 @@ z-index:-1;
 .title{
 font-size:120px;
 font-weight:800;
-transition:0.3s;
+transition:0.2s;
 }
 
 .subtitle{
 font-size:24px;
 margin-top:20px;
 opacity:0.8;
-transition:0.3s;
+transition:0.2s;
 }
 
 /* BUTTON */
@@ -102,15 +89,15 @@ justify-content:center;
 }
 
 .content{
-text-align:center;
 opacity:0;
-transform:scale(0.8);
+transform:translateY(80px);
 transition:0.6s;
+text-align:center;
 }
 
 .content.show{
 opacity:1;
-transform:scale(1);
+transform:translateY(0);
 }
 
 .big{
@@ -127,7 +114,7 @@ margin-top:40px;
 .track{
 display:flex;
 gap:120px;
-animation:scroll 70s linear infinite;
+animation:scroll 80s linear infinite;
 }
 
 .logo{
@@ -162,14 +149,12 @@ background:linear-gradient(135deg,#1e40af,#2563eb);
 
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader">LIBERTY 25</div>
-
 <!-- HERO -->
 <section class="hero">
+
 <div class="sticky">
 
-<video autoplay muted loop>
+<video id="video" muted playsinline preload="auto">
 <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-city-at-night-1572/1080p.mp4">
 </video>
 
@@ -183,21 +168,19 @@ background:linear-gradient(135deg,#1e40af,#2563eb);
 </div>
 </section>
 
-<!-- SCENE 1 -->
+<!-- SCENES -->
 <section class="scene">
 <div class="content">
 <div class="big">25 años creando conexiones</div>
 </div>
 </section>
 
-<!-- SCENE 2 -->
 <section class="scene">
 <div class="content">
 <div class="big">No es un evento</div>
 </div>
 </section>
 
-<!-- SCENE 3 -->
 <section class="scene">
 <div class="content">
 <div class="big">Es una experiencia</div>
@@ -237,34 +220,38 @@ background:linear-gradient(135deg,#1e40af,#2563eb);
 
 <script>
 
-/* LOADER */
-window.onload = () => {
-setTimeout(()=>{
-document.getElementById('loader').style.display='none';
-},1500);
-};
-
-/* SCROLL ANIMATIONS */
-const contents = document.querySelectorAll('.content');
+/* SCROLL CONTROL VIDEO */
+const video = document.getElementById('video');
 
 window.addEventListener('scroll', () => {
 
+let scrollTop = window.scrollY;
+let maxScroll = document.querySelector('.hero').offsetHeight - window.innerHeight;
+let scrollFraction = scrollTop / maxScroll;
+
+if(video.duration){
+video.currentTime = video.duration * scrollFraction;
+}
+
+/* TEXT EFFECT */
+let title = document.getElementById('title');
+let subtitle = document.getElementById('subtitle');
+
+title.style.transform = `scale(${1 - scrollFraction * 0.5})`;
+subtitle.style.opacity = 1 - scrollFraction * 1.5;
+
+});
+
+/* CONTENT APPEAR */
+const contents = document.querySelectorAll('.content');
+
+window.addEventListener('scroll', () => {
 contents.forEach(el=>{
-const rect = el.getBoundingClientRect();
+let rect = el.getBoundingClientRect();
 if(rect.top < window.innerHeight * 0.7){
 el.classList.add('show');
 }
 });
-
-/* HERO TRANSFORM */
-let scroll = window.scrollY;
-
-let title = document.getElementById('title');
-let subtitle = document.getElementById('subtitle');
-
-title.style.transform = `scale(${1 - scroll/3000})`;
-subtitle.style.opacity = 1 - scroll/600;
-
 });
 
 </script>
