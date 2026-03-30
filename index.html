@@ -18,37 +18,12 @@ font-family:'Inter', sans-serif;
 background:#000;
 color:white;
 overflow-x:hidden;
-cursor:none;
 }
 
-/* CURSOR */
-.cursor{
-width:20px;
-height:20px;
-border:2px solid #3b82f6;
-border-radius:50%;
-position:fixed;
-pointer-events:none;
-transform:translate(-50%,-50%);
-transition:0.1s;
-z-index:999;
-}
-
-.cursor-follower{
-width:40px;
-height:40px;
-background:rgba(59,130,246,0.2);
-border-radius:50%;
-position:fixed;
-pointer-events:none;
-transform:translate(-50%,-50%);
-transition:0.2s;
-z-index:998;
-}
-
-/* VIDEO HERO */
+/* HERO PINNED */
 .hero{
-position:relative;
+position:sticky;
+top:0;
 height:100vh;
 display:flex;
 flex-direction:column;
@@ -60,8 +35,6 @@ overflow:hidden;
 
 .hero video{
 position:absolute;
-top:0;
-left:0;
 width:100%;
 height:100%;
 object-fit:cover;
@@ -80,61 +53,69 @@ z-index:-1;
 .hero h1{
 font-size:110px;
 font-weight:800;
-letter-spacing:-3px;
+transition:0.4s;
 }
 
 .hero p{
 margin-top:20px;
 font-size:22px;
 opacity:0.8;
+transition:0.4s;
 }
 
-.btn{
-margin-top:40px;
-padding:18px 45px;
-border-radius:50px;
-background:linear-gradient(135deg,#3b82f6,#2563eb);
-color:white;
-text-decoration:none;
-font-weight:600;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:scale(1.1);
-box-shadow:0 10px 40px rgba(37,99,235,0.7);
-}
-
-/* BLOCKS */
-.block{
-height:120vh;
+/* SCROLL SECTIONS */
+.section{
+height:150vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-position:relative;
 }
 
+.inner{
+max-width:900px;
+opacity:0;
+transform:scale(0.8);
+transition:0.6s;
+}
+
+.inner.show{
+opacity:1;
+transform:scale(1);
+}
+
+/* TITULOS */
 .big{
 font-size:100px;
 font-weight:800;
+line-height:1.1;
 }
 
-/* PARALLAX */
-.parallax{
-transform:translateY(0);
-transition:transform 0.2s linear;
+/* CARDS */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(20px);
 }
 
 /* SPONSORS */
 .carousel{
 overflow:hidden;
+margin-top:40px;
 }
 
 .track{
 display:flex;
 gap:100px;
-animation:scroll 50s linear infinite;
+animation:scroll 60s linear infinite;
 }
 
 .logo{
@@ -158,6 +139,17 @@ align-items:center;
 background:linear-gradient(135deg,#1e40af,#2563eb);
 }
 
+/* BUTTON */
+.btn{
+margin-top:40px;
+padding:18px 45px;
+border-radius:50px;
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
 /* ANIMACIONES */
 @keyframes scroll{
 0%{transform:translateX(0);}
@@ -169,40 +161,70 @@ background:linear-gradient(135deg,#1e40af,#2563eb);
 
 <body>
 
-<!-- CURSOR -->
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-
 <!-- HERO -->
 <section class="hero">
 <video autoplay muted loop>
 <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-city-at-night-1572/1080p.mp4" type="video/mp4">
 </video>
 
-<h1 class="parallax">LIBERTY 25</h1>
-<p class="parallax">Esto no es una fiesta. Es historia.</p>
+<h1 id="title">LIBERTY 25</h1>
+<p id="subtitle">Esto no es una fiesta. Es historia.</p>
 
 <a href="#" class="btn">Registrarse</a>
 </section>
 
-<!-- BLOQUES -->
-<section class="block">
-<div class="big parallax">25 años conectando</div>
+<!-- SCENE 1 -->
+<section class="section">
+<div class="inner">
+<div class="big">25 años creando conexiones</div>
+</div>
 </section>
 
-<section class="block">
-<div class="big parallax">No es un evento</div>
+<!-- SCENE 2 -->
+<section class="section">
+<div class="inner">
+<div class="big">No es un evento</div>
+</div>
 </section>
 
-<section class="block">
-<div class="big parallax">Es una experiencia</div>
+<!-- SCENE 3 -->
+<section class="section">
+<div class="inner">
+<div class="big">Es una experiencia</div>
+</div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="section">
+<div class="inner">
+
+<h2 style="font-size:50px;">Una experiencia única</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Networking</h3>
+<p>Conectá con los principales actores</p>
+</div>
+
+<div class="card">
+<h3>Celebración</h3>
+<p>Un evento diseñado para sorprender</p>
+</div>
+
+<div class="card">
+<h3>Experiencia</h3>
+<p>Producción y ambiente premium</p>
+</div>
+</div>
+
+</div>
 </section>
 
 <!-- SPONSORS -->
-<section class="block">
-<div>
+<section class="section">
+<div class="inner">
 
-<h2 style="font-size:50px;margin-bottom:40px;">Nos acompañan</h2>
+<h2 style="font-size:50px;">Nos acompañan</h2>
 
 <div class="carousel">
 <div class="track">
@@ -231,24 +253,27 @@ background:linear-gradient(135deg,#1e40af,#2563eb);
 
 <script>
 
-/* CURSOR */
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
+/* SCROLL KEYNOTE EFFECT */
+const sections = document.querySelectorAll('.inner');
 
-document.addEventListener('mousemove', e => {
-cursor.style.top = e.clientY + 'px';
-cursor.style.left = e.clientX + 'px';
-
-follower.style.top = e.clientY + 'px';
-follower.style.left = e.clientX + 'px';
-});
-
-/* PARALLAX */
 window.addEventListener('scroll', () => {
-document.querySelectorAll('.parallax').forEach(el=>{
-let speed = 0.3;
-el.style.transform = `translateY(${window.scrollY * speed}px)`;
+
+sections.forEach(section => {
+const rect = section.getBoundingClientRect();
+
+if(rect.top < window.innerHeight * 0.7){
+section.classList.add('show');
+}
 });
+
+/* HERO SCALE */
+let scroll = window.scrollY;
+let title = document.getElementById('title');
+let subtitle = document.getElementById('subtitle');
+
+title.style.transform = `scale(${1 - scroll/2000})`;
+subtitle.style.opacity = 1 - scroll/500;
+
 });
 
 </script>
